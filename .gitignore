@@ -1,0 +1,17 @@
+## Защищенные переменные
+.env
+.dockerignore
+.sequelizerc
+
+## Собранный проект
+/dist
+
+## Зависимости
+/node_modules
+
+## Claude файлы
+.claudeignore
+claude.md
+
+## Логирование системы
+.DS_STORE

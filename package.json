@@ -1,0 +1,46 @@
+{
+  "name": "anrp",
+  "version": "1.0.0",
+  "description": "",
+  "types": "types",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "concurrently --raw --kill-others 'npm:dev:bundle' 'npm:dev:app'",
+    "dev:bundle": "node esbuild.mjs --watch",
+    "dev:app": "nodemon --enable-source-maps --signal SIGTERM --watch dist --ext '*' dist/index.js",
+    "build": "tsc --noemit",
+    "db:build": "node esbuild.migrations.mjs",
+    "db:migrate": "npm run db:build && sequelize-cli db:migrate",
+    "db:migrate:undo": "npm run db:build && sequelize-cli db:migrate:undo",
+    "db:migrate:undo:all": "npm run db:build && sequelize-cli db:migrate:undo:all",
+    "db:migrate:status": "npm run db:build && sequelize-cli db:migrate:status",
+    "db:migration:generate": "sequelize-cli migration:generate --name"
+  },
+  "keywords": [],
+  "author": "Roman Vasenin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.9.2",
+    "chalk": "^5.6.2",
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.25.12",
+    "esbuild-plugin-import-glob": "^0.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.10",
+    "sequelize-cli": "^6.6.3",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/pg": "^8.15.6",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.6.1",
+    "fastify-plugin": "^5.1.0",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7"
+  }
+}

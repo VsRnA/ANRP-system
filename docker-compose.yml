@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: anrp_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: anrp_app
+    ports:
+      - "${HTTP_PORT}:3000"
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules 
+
+volumes:
+  postgres_data:
+  node_modules:
