@@ -1,4 +1,4 @@
-export const createUserSchema = {
+export const CreateSchema = {
   payload: {
     type: 'object',
     properties: {

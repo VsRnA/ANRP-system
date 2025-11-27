@@ -1,5 +1,5 @@
 import { httpTransport } from '#Infrastructure/fastify';
-import { createUserSchema } from '../schemas/create';
+import { CreateSchema } from '../schemas/create';
 import { create as createUser } from '../repositories/create';
 import { get as getUser } from '../repositories/get';
 import { find as findUserRole } from '#App/userRoles/repositories/find';
@@ -7,10 +7,9 @@ import { create as createUserRoleAssignment } from '#App/userRoleAssignments/rep
 import { find as findUser } from '../repositories/find';
 import { hashPassword } from '#Shared/password';
 import { EntityAlreadyExistedError } from '#Lib/errors';
-import { plainify } from '#Lib/database/sequelize';
 import db from '#Infrastructure/sequelize';
 
-httpTransport.handler.post('/api/user/v1', createUserSchema, async (request) => {
+httpTransport.handler.post('/api/user/v1', CreateSchema, async (request) => {
   const { email, password, firstName, lastName, roleId } = request.payload;
 
   const existingUser = await getUser({ email });
@@ -42,7 +41,5 @@ httpTransport.handler.post('/api/user/v1', createUserSchema, async (request) => 
     return userWithRoles;
   });
 
-  const plainUser = await plainify(user);
-
-  return { data: plainUser };
+  return { data: user };
 }, { authOnly: false });

@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest, RouteShorthandOptions } from 'fastify';
 import { InferPayload, InferParams, InferQuery, InferResponse, TypedRouteHandler } from '#Lib/http/types';
-import { Hooks, HookType } from './hooks';
+import { Hooks } from './hooks';
 
 type HttpMethod = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'options' | 'head';
 

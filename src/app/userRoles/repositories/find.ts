@@ -7,9 +7,6 @@ interface FindUserRoleFilters {
   keyWord?: string;
 }
 
-/**
- * Находит роль по фильтрам или выбрасывает NotFoundError если не найдена
- */
 export async function find(filters: FindUserRoleFilters, repOptions?: FindOptions): Promise<UserRole> {
   const where: WhereOptions<UserRoleAttributes> = {};
 

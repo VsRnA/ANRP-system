@@ -6,9 +6,6 @@ interface GetUserRoleFilters {
   keyWord?: string;
 }
 
-/**
- * Получает роль по фильтрам или null если не найдена
- */
 export async function get(filters: GetUserRoleFilters, repOptions?: FindOptions): Promise<UserRole | null> {
   const where: WhereOptions<UserRoleAttributes> = {};
 

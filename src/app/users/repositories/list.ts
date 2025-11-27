@@ -1,6 +1,7 @@
 import User, { UserAttributes } from '#App/users/models/user.model';
 import UserRole from '#App/userRoles/models/userRole.model';
 import { WhereOptions, Op, FindOptions } from 'sequelize';
+import { plainify } from '#Lib/database/sequelize';
 
 interface ListUserFilters {
   guid?: string;
@@ -15,7 +16,7 @@ interface ListUserFilters {
 /**
  * Получает список пользователей с фильтрацией и пагинацией
  */
-export async function list(filters: ListUserFilters = {}, repOptions?: FindOptions): Promise<User[]> {
+export async function list(filters: ListUserFilters = {}, repOptions?: FindOptions) {
   const where: WhereOptions<UserAttributes> = {};
 
   if (filters.guid) {
@@ -55,5 +56,5 @@ export async function list(filters: ListUserFilters = {}, repOptions?: FindOptio
     ...repOptions,
   });
 
-  return users;
+  return plainify(users);
 }

@@ -1,4 +1,4 @@
-export const getUserSchema = {
+export const GetSchema = {
   params: {
     type: 'object',
     properties: {

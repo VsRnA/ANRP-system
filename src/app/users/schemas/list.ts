@@ -1,4 +1,4 @@
-export const listUsersSchema = {
+export const ListSchema = {
   query: {
     type: 'object',
     properties: {

@@ -2,6 +2,7 @@ import User, { UserAttributes } from '#App/users/models/user.model';
 import UserRole from '#App/userRoles/models/userRole.model';
 import { WhereOptions, FindOptions } from 'sequelize';
 import { NotFoundError } from '#Lib/errors';
+import { plainify } from '#Lib/database/sequelize';
 
 interface FindUserFilters {
   guid?: string;
@@ -9,7 +10,7 @@ interface FindUserFilters {
   includePassword?: boolean;
 }
 
-export async function find(filters: FindUserFilters, repOptions?: FindOptions): Promise<User> {
+export async function find(filters: FindUserFilters, repOptions?: FindOptions) {
   const where: WhereOptions<UserAttributes> = {};
 
   if (filters.guid) {
@@ -42,5 +43,5 @@ export async function find(filters: FindUserFilters, repOptions?: FindOptions): 
     throw new NotFoundError('User not found');
   }
 
-  return user;
+  return plainify(user);
 }

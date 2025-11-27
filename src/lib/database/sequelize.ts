@@ -7,7 +7,6 @@ export type ModelFields<T extends Model> = Partial<Attributes<T>>;
 type AssociationFn = (models: Record<string, ModelStatic<any>>)=>void;
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 
-/** Возвращает plain-объект из модели Sequelize */
 export async function plainify<
   T extends(Model | Promise<Model> | Model[] | Promise<Model[]> | null | unknown),
   M = T extends (Model | Model[] | (Model | null)) ? T :
@@ -24,7 +23,6 @@ export async function plainify<
     : toPlain(model);
 }
 
-/** make metadata query */
 const metadataOperatorsMap = {
   $in: Op.in,
   $notIn: Op.notIn,
@@ -76,7 +74,6 @@ export class SequelizeDB {
     }
   }
 
-  /** Запустить репозитории в транзакции */
   runInTransaction<T>(callback:(t: Transaction) => PromiseLike<T>): Promise<T> {
     return this.instance.transaction(callback);
   }

@@ -6,9 +6,6 @@ interface CreateUserRoleAssignmentData {
   roleId: number;
 }
 
-/**
- * Создает назначение роли пользователю
- */
 export async function create(data: CreateUserRoleAssignmentData, repOptions?: CreateOptions): Promise<UserRoleAssignment> {
   const assignment = await UserRoleAssignment.create({
     userGuid: data.userGuid,
